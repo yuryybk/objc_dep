@@ -97,6 +97,14 @@ Here is the kind of chart you can expect with a 100 classes project.
 
 Will exclude files with names that begin with "Internal", or contain the word "secret". Additionally all files in folders named subdir1 and subdir2 are ignored.
 
+`% python objc_dep.py /path/to/repo -group > graph.dot`
+
+Will group classes and class categories together and represent in like single node in graph
+
+`% python objc_dep.py /path/to/repo --skip /path/to/file_with_nodes_to_skip > graph.dot`
+
+Will skip nodes which has name from 'file_with_nodes_to_skip'
+
 ### Possible improvements
 
 The Cocoa framework enforces the [MVC paradigm](http://developer.apple.com/technologies/mac/cocoa.html), which states (to be short) that model objects and graphical objects should be clearly separated by controller objects. The script could probably be improved by drawing classes which depend on Foundation and classes which depend on AppKit/UIKit with different colors.
