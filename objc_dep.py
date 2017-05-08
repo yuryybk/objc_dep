@@ -28,6 +28,7 @@ local_regex_import = re.compile("^\s*#(?:import|include)\s+\"(?P<filename>\S*)(?
 system_regex_import = re.compile("^\s*#(?:import|include)\s+[\"<](?P<filename>\S*)(?P<extension>\.(?:h|hpp|hh))?[\">]")
 objc_extensions = ['.h', '.hh', '.hpp', '.m', '.mm', '.c', '.cc', '.cpp']
 
+
 def gen_filenames_imported_in_file(path, regex_exclude, system, extensions):
     for line in open(path):
         results = re.search(system_regex_import, line) if system else re.search(local_regex_import, line)
@@ -37,6 +38,7 @@ def gen_filenames_imported_in_file(path, regex_exclude, system, extensions):
             if regex_exclude is not None and regex_exclude.search(filename + extension):
                 continue
             yield (filename + extension) if extension else filename
+
 
 def dependencies_in_project(path, ext, exclude, ignore, system, extensions):
     d = {}
@@ -66,11 +68,12 @@ def dependencies_in_project(path, ext, exclude, ignore, system, extensions):
             path = os.path.join(root, f)
 
             for imported_filename in gen_filenames_imported_in_file(path, regex_exclude, system, extensions):
-                if imported_filename != filename and '+' not in imported_filename and '+' not in filename:
+                if imported_filename != filename:
                     imported_filename = imported_filename if extensions else os.path.splitext(imported_filename)[0]
                     d[filename].add(imported_filename)
 
     return d
+
 
 def dependencies_in_project_with_file_extensions(path, exts, exclude, ignore, system, extensions, root_class):
 
@@ -100,6 +103,7 @@ def dependencies_in_project_with_file_extensions(path, exts, exclude, ignore, sy
 
     return d
 
+
 def two_ways_dependencies(d):
 
     two_ways = Set()
@@ -116,6 +120,7 @@ def two_ways_dependencies(d):
                     
     return two_ways
 
+
 def untraversed_files(d):
 
     dead_ends = Set()
@@ -126,6 +131,7 @@ def untraversed_files(d):
                 dead_ends.add(file_b)
 
     return dead_ends
+
 
 def category_files(d):
     d2 = {}
@@ -148,7 +154,8 @@ def referenced_classes_from_dict(d):
             d2[x].add(k)
     
     return d2
-    
+
+
 def print_frequencies_chart(d):
     
     lengths = map(lambda x:len(x), d.itervalues())
@@ -168,6 +175,7 @@ def print_frequencies_chart(d):
     for i in range(0, max_length+1):
         s = "%2d | %s\n" % (i, ", ".join(sorted(list(l[i]))))
         sys.stderr.write(s)
+
 
 def dependencies_in_dot_format(path, exclude, ignore, system, extensions, root_class):
     
@@ -260,6 +268,7 @@ def main():
             for (k, k2) in two_ways_set:
                 sys.stderr.write("%s <-> %s\n" % (k, k2))
             sys.exit(1)
+
 
 if __name__=='__main__':
     main()
