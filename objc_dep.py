@@ -72,6 +72,12 @@ def dependencies_in_project(path, ext, exclude, ignore, system, extensions):
                     imported_filename = imported_filename if extensions else os.path.splitext(imported_filename)[0]
                     d[filename].add(imported_filename)
 
+                if "/" not in imported_filename:
+                    d[filename].add(imported_filename)
+                else:
+                    index = imported_filename.rfind("/", 0, len(imported_filename))
+                    imported_filename_substring = imported_filename[index + 1:]
+                    d[filename].add(imported_filename_substring)
     return d
 
 
