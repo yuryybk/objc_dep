@@ -18,7 +18,7 @@ Fork of the dependency graph [tool](https://github.com/nst/objc_dep) with small 
 
 #### 3. Use advanced viewer for analysis
 
-To overview graph structure i recomend to use [Gephi](https://gephi.org/).
+To overview graph structure i highly recommend to use [Gephi](https://gephi.org/).
 
 # License
 
