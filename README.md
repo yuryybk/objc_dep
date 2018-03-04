@@ -1,4 +1,4 @@
-# Project Title
+# objc-dep-tool
 
 Fork of the dependency graph [tool](https://github.com/nst/objc_dep) with small improvements.
 
