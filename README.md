@@ -8,17 +8,17 @@ Fork of the dependency graph [tool](https://github.com/nst/objc_dep) with small 
 
 #### 2. Use additional options
 
-`% python objc_dep.py /path/to/repo --group > graph.dot`
+- Will group classes and class categories together and represent in like single node in graph.
 
-Will group classes and class categories together and represent in like single node in graph.
+  `% python objc_dep.py /path/to/repo --group > graph.dot`
 
-`% python objc_dep.py /path/to/repo --skip /path/to/file_with_nodes_to_skip > graph.dot`
+- Will skip nodes which has name from 'file_with_nodes_to_skip'.
 
-Will skip nodes which has name from 'file_with_nodes_to_skip'.
+  `% python objc_dep.py /path/to/repo --skip /path/to/file_with_nodes_to_skip > graph.dot`
 
 #### 3. Use advanced viewer for analysis
 
-To overview grapsh structure i recomend to use [Gephi](https://gephi.org/)
+To overview graph structure i recomend to use [Gephi](https://gephi.org/).
 
 # License
 
